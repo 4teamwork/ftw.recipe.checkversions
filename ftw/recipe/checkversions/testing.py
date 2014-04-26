@@ -1,5 +1,7 @@
 from pkg_resources import get_distribution
 from plone.testing import Layer
+import shutil
+import tempfile
 import zc.buildout.testing
 
 
@@ -36,3 +38,15 @@ class RecipeLayer(Layer):
 
 
 RECIPE_FIXTURE = RecipeLayer()
+
+
+class TempDirectory(Layer):
+
+    def testSetUp(self):
+        self['tempdir'] = tempfile.mkdtemp('ftw.recipe.checkversions')
+
+    def testTearDown(self):
+        shutil.rmtree(self['tempdir'])
+
+
+TEMP_DIRECTORY_FIXTURE = TempDirectory()
