@@ -7,6 +7,38 @@ of your dependency packages.
 It does this based on your version pinnings (buildout config file) by checking the
 current releases of each package on pypi.
 
+
+Installation
+============
+
+Buildout example:
+
+.. code:: ini
+
+    [buildout]
+    parts = checkversions
+
+    [checkversions]
+    recipe = ftw.recipe.checkversions
+    versions = versions.cfg
+    blacklists =
+        http://dist.plone.org/release/4-latest/versions.cfg
+        https://raw.github.com/4teamwork/ftw-buildouts/master/test-versions.cfg
+
+
+**versions**
+  A file path or URL to a buildout config file containing version pinnings.
+  The list of packages and the current pinnings are retreived from this file
+  from the ``[versions]`` section.
+
+**blacklists**
+  A list of file paths and / or URLs of buildout configuration files containing
+  version pinnings of packages to be ignored.
+  All packages in the ``[versions]`` section are ignored, regardless of their pinning.
+
+
+
+
 Links
 =====
 

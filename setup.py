@@ -6,6 +6,7 @@ version = '1.0.0.dev0'
 
 
 tests_require = [
+    'plone.testing',
     'unittest2',
     ]
 
@@ -35,11 +36,17 @@ setup(name='ftw.recipe.checkversions',
 
       install_requires=[
         'setuptools',
+        'zc.buildout',
+        'zc.recipe.egg',
         ],
 
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
 
       entry_points = {
+        'zc.buildout': [
+            'default = ftw.recipe.checkversions.recipe:Recipe'],
+        'console_scripts': [
+            'checkversions = ftw.recipe.checkversions.command:main']
         },
       )
