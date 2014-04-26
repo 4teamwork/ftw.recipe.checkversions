@@ -37,6 +37,12 @@ Buildout example:
   All packages in the ``[versions]`` section are ignored, regardless of their pinning.
 
 
+Usage
+=====
+
+After installing the recipe using buildout simply run the ``bin/checkversions`` script.
+The script prints out new versions of packages which are not listed in a blacklist.
+Packages which are already up to date are not listed at all.
 
 
 Links
