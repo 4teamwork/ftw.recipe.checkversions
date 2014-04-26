@@ -1,7 +1,12 @@
+from mocker import ANY
+from mocker import Mocker
+from mocker import expect
 from pkg_resources import get_distribution
 from plone.testing import Layer
+import os
 import shutil
 import tempfile
+import zc.buildout.easy_install
 import zc.buildout.testing
 
 
@@ -35,9 +40,35 @@ class RecipeLayer(Layer):
 
     def testTearDown(self):
         zc.buildout.testing.buildoutTearDown(self)
+        zc.buildout.easy_install.default_index_url = 'http://pypi.python.org/simple'
+        os.environ['buildout-testing-index-url'] = 'http://pypi.python.org/simple'
+        zc.buildout.easy_install._indexes = {}
 
 
 RECIPE_FIXTURE = RecipeLayer()
+
+
+class MockPypiLayer(Layer):
+
+    def testSetUp(self):
+        self['pypi'] = {'foo': '2',
+                        'bar': '2'}
+
+        self['mocker'] = mocker = Mocker()
+        fetcher = mocker.replace('ftw.recipe.checkversions.pypi.get_newest_release')
+        expect(fetcher(ANY)).call(self.fetcher).count(0, None)
+        mocker.replay()
+
+    def testTearDown(self):
+        mocker = self['mocker']
+        mocker.restore()
+        mocker.verify()
+
+    def fetcher(self, package):
+        return self['pypi'].get(package, None)
+
+
+MOCK_PYPI_FIXTURE = MockPypiLayer()
 
 
 class TempDirectory(Layer):
