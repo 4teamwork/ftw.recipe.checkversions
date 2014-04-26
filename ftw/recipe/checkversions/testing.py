@@ -40,8 +40,9 @@ class RecipeLayer(Layer):
 
     def testTearDown(self):
         zc.buildout.testing.buildoutTearDown(self)
-        zc.buildout.easy_install.default_index_url = 'http://pypi.python.org/simple'
-        os.environ['buildout-testing-index-url'] = 'http://pypi.python.org/simple'
+        pypi_url = 'http://pypi.python.org/simple'
+        zc.buildout.easy_install.default_index_url = pypi_url
+        os.environ['buildout-testing-index-url'] = pypi_url
         zc.buildout.easy_install._indexes = {}
 
 
@@ -55,7 +56,8 @@ class MockPypiLayer(Layer):
                         'bar': '2'}
 
         self['mocker'] = mocker = Mocker()
-        fetcher = mocker.replace('ftw.recipe.checkversions.pypi.get_newest_release')
+        fetcher = mocker.replace(
+            'ftw.recipe.checkversions.pypi.get_newest_release')
         expect(fetcher(ANY)).call(self.fetcher).count(0, None)
         mocker.replay()
 

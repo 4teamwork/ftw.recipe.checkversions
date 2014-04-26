@@ -17,7 +17,8 @@ def read_versions(buildout_directory, filename_or_url):
         if _isurl(filename_or_url):
             buildout = load_buildout_from_url(filename_or_url)
         else:
-            buildout = load_buildout_from_file(buildout_directory, filename_or_url)
+            buildout = load_buildout_from_file(buildout_directory,
+                                               filename_or_url)
 
     return buildout['versions']
 

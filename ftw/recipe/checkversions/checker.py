@@ -4,7 +4,8 @@ from ftw.recipe.checkversions.pypi import get_newest_release
 def get_version_updates(current_versions,
                         blacklist=()):
     """Checks all packages in current_versions for newer releases and returns
-    a new dict with all updated packages, ignoring those listed in the blacklist.
+    a new dict with all updated packages, ignoring those listed
+    in the blacklist.
     """
 
     updates = {}
