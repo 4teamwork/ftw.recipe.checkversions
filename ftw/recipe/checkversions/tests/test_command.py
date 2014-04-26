@@ -49,6 +49,7 @@ class TestCommand(TestCase):
 
         self.assertEquals(
             '\n'.join((
+                    '[versions]',
                     'requests = 2.3.0',
                     # 'setuptools = 0.6c11',  # blacklisted
                     # 'zope.component = 4.2.1',   # no new version
