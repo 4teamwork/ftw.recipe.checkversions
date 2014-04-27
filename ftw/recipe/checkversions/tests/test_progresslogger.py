@@ -1,6 +1,5 @@
 from StringIO import StringIO
 from ftw.recipe.checkversions.progresslogger import ProgressLogger
-from ftw.recipe.checkversions.utils import capture_streams
 from time import sleep
 from unittest2 import TestCase
 
