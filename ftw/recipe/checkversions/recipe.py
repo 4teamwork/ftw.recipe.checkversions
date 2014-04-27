@@ -12,9 +12,15 @@ class Recipe(Egg):
         options['scripts'] = 'checkversions'
 
         blacklists = options.get('blacklists')
+        blacklists = blacklists and blacklists.split() or []
+        blacklist_packages = options.get('blacklist-packages')
+        blacklist_packages = (blacklist_packages and
+                              blacklist_packages.split() or [])
+
         kwargs = {'buildout_dir': buildout['buildout']['directory'],
                   'versions': options.get('versions', 'versions.cfg'),
-                  'blacklists': blacklists and blacklists.split() or []}
+                  'blacklists': blacklists,
+                  'blacklist_packages': blacklist_packages}
         options['arguments'] = '**%s' % pformat(kwargs)
 
         super(Recipe, self).__init__(buildout, name, options)

@@ -17,6 +17,7 @@ VERSIONS_CONFIG = '\n'.join((
         'setuptools = 0.6c11',
         'zope.component = 4.2.1',
         'zope.interface = 4.1.0',
+        'zope.annotation = 4.0.0',
         ))
 
 
@@ -38,14 +39,18 @@ class TestCommand(TestCase):
             'requests': '2.3.0',
             'setuptools': '0.7',
             'zope.component': '4.2.1',
-            'zope.interface': '5.0.0',}
+            'zope.interface': '5.0.0',
+            'zope.annotation': '4.2.0'}
 
         fshelpers.create_structure(self.tempdir, {
                 'versions.cfg': VERSIONS_CONFIG})
 
         output = StringIO()
         with capture_streams(output):
-            main(self.tempdir, 'versions.cfg', (BLACKLIST_URL,))
+            main(buildout_dir=self.tempdir,
+                 versions='versions.cfg',
+                 blacklists=(BLACKLIST_URL,),
+                 blacklist_packages=('zope.annotation', ))
 
         self.assertEquals(
             '\n'.join((

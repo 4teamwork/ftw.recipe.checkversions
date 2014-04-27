@@ -98,3 +98,23 @@ class TestRecipe(TestCase):
         self.assertDictContainsSubset(
             {'blacklists': []},
             extract_script_arguments(script_path))
+
+    def test_passes_blacklist_packages_argument_to_command(self):
+        self.write('buildout.cfg', '\n'.join((
+                    BUILDOUT_CONFIG,
+                    'blacklist-packages =',
+                    '  foo'
+                    '  bar')))
+        self.system(self.buildout)
+        script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
+        self.assertDictContainsSubset(
+            {'blacklist_packages': ["foo", "bar"]},
+            extract_script_arguments(script_path))
+
+    def test_blacklist_packages_defaults_to_empty_list(self):
+        self.write('buildout.cfg', BUILDOUT_CONFIG)
+        self.system(self.buildout)
+        script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
+        self.assertDictContainsSubset(
+            {'blacklist_packages': []},
+            extract_script_arguments(script_path))

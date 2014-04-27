@@ -24,6 +24,8 @@ Buildout example:
     blacklists =
         http://dist.plone.org/release/4-latest/versions.cfg
         https://raw.github.com/4teamwork/ftw-buildouts/master/test-versions.cfg
+    backlist-packages =
+        zope.interface
 
 
 **versions**
@@ -35,6 +37,9 @@ Buildout example:
   A list of file paths and / or URLs of buildout configuration files containing
   version pinnings of packages to be ignored.
   All packages in the ``[versions]`` section are ignored, regardless of their pinning.
+
+**blacklist-packages**
+  List package names to be blacklisted.
 
 
 Usage
