@@ -1,10 +1,10 @@
-from StringIO import StringIO
 from ftw.recipe.checkversions.utils import capture_streams
 from ftw.recipe.checkversions.utils import chdir
 from zc.buildout.buildout import Buildout
 from zc.buildout.buildout import _isurl
 import os.path
 import shutil
+import sys
 import tempfile
 
 
@@ -13,7 +13,7 @@ def read_versions(buildout_directory, filename_or_url):
     return the version-pinnings from the [versions] section as
     dict.
     """
-    with capture_streams(stdout=StringIO()):
+    with capture_streams(stdout=sys.stderr):
         if _isurl(filename_or_url):
             buildout = load_buildout_from_url(filename_or_url)
         else:
