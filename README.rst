@@ -24,7 +24,7 @@ Buildout example:
     blacklists =
         http://dist.plone.org/release/4-latest/versions.cfg
         https://raw.github.com/4teamwork/ftw-buildouts/master/test-versions.cfg
-    backlist-packages =
+    blacklist-packages =
         zope.interface
 
 
