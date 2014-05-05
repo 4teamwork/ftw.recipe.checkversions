@@ -50,6 +50,13 @@ The script prints out new versions of packages which are not listed in a blackli
 Packages which are already up to date are not listed at all.
 
 
+Similar packages
+================
+
+- `z3c.checkversions <https://pypi.python.org/pypi/z3c.checkversions>`_ does a similar job,
+  but it does some things differently, such as the blacklisting strategy.
+
+
 Links
 =====
 
