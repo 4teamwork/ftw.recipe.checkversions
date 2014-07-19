@@ -59,6 +59,7 @@ class MockPypiLayer(Layer):
         fetcher = mocker.replace(
             'ftw.recipe.checkversions.pypi.get_newest_release')
         expect(fetcher(ANY)).call(self.fetcher).count(0, None)
+        expect(fetcher(ANY, index=ANY)).call(self.fetcher).count(0, None)
         mocker.replay()
 
     def testTearDown(self):
@@ -66,7 +67,7 @@ class MockPypiLayer(Layer):
         mocker.restore()
         mocker.verify()
 
-    def fetcher(self, package):
+    def fetcher(self, package, index=None):
         return self['pypi'].get(package, None)
 
 

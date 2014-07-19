@@ -1,6 +1,5 @@
 from ftw.recipe.checkversions.testing import RECIPE_FIXTURE
 from unittest2 import TestCase
-import json
 import os
 import re
 
@@ -23,7 +22,7 @@ def extract_script_arguments(script_path):
     assert match, 'Could not find command call in script %s \n %s' % (
         script_path, xpr)
     kwargs = match.group(1).replace("'", '"')
-    return json.loads(kwargs)
+    return eval(kwargs)
 
 
 class TestRecipe(TestCase):
@@ -117,4 +116,22 @@ class TestRecipe(TestCase):
         script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
         self.assertDictContainsSubset(
             {'blacklist_packages': []},
+            extract_script_arguments(script_path))
+
+    def test_custom_index(self):
+        self.write('buildout.cfg', '\n'.join((
+                    BUILDOUT_CONFIG,
+                    'index = http://custom.pypi.org/simple')))
+        self.system(self.buildout)
+        script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
+        self.assertDictContainsSubset(
+            {'index': 'http://custom.pypi.org/simple'},
+            extract_script_arguments(script_path))
+
+    def test_index_option_defaults_to_None(self):
+        self.write('buildout.cfg', BUILDOUT_CONFIG)
+        self.system(self.buildout)
+        script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
+        self.assertDictContainsSubset(
+            {'index': None},
             extract_script_arguments(script_path))

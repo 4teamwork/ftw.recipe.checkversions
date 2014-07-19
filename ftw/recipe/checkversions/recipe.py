@@ -20,7 +20,8 @@ class Recipe(Egg):
         kwargs = {'buildout_dir': buildout['buildout']['directory'],
                   'versions': options.get('versions', 'versions.cfg'),
                   'blacklists': blacklists,
-                  'blacklist_packages': blacklist_packages}
+                  'blacklist_packages': blacklist_packages,
+                  'index': options.get('index', None)}
         options['arguments'] = '**%s' % pformat(kwargs)
 
         super(Recipe, self).__init__(buildout, name, options)

@@ -41,6 +41,9 @@ Buildout example:
 **blacklist-packages**
   List package names to be blacklisted.
 
+**index**
+  Custom pypi index URL, e.g. ``http://custom.pypi/simple``
+
 
 Usage
 =====

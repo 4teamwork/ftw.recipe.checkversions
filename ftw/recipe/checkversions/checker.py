@@ -3,7 +3,7 @@ from ftw.recipe.checkversions.pypi import get_newest_release
 import sys
 
 
-def get_version_updates(versions, blacklist=()):
+def get_version_updates(versions, blacklist=(), index=None):
     """Checks all packages in current_versions for newer releases and returns
     a new dict with all updated packages, ignoring those listed
     in the blacklist.
@@ -14,7 +14,7 @@ def get_version_updates(versions, blacklist=()):
 
     updates = {}
     for package, version in ProgressLogger(versions, sys.stderr):
-        newest = get_newest_release(package)
+        newest = get_newest_release(package, index=index)
         if newest is None:
             continue
 
