@@ -52,11 +52,12 @@ class TestCommand(TestCase):
                  blacklists=(BLACKLIST_URL,),
                  blacklist_packages=('zope.annotation', ))
 
-        self.assertEquals(
-            '\n'.join((
-                    '[versions]',
-                    'requests = 2.3.0',
-                    # 'setuptools = 0.6c11',  # blacklisted
-                    # 'zope.component = 4.2.1',   # no new version
-                    'zope.interface = 5.0.0')),
+        self.assertMultiLineEqual(
+            '\n'.join(
+                ('[versions]',
+                 'requests = 2.3.0                         # was 2.0.0',
+                 # 'setuptools = 0.6c11',  # blacklisted
+                 # 'zope.component = 4.2.1',   # no new version
+                 'zope.interface = 5.0.0                   # was 4.1.0',
+                 )),
             output.getvalue().strip())

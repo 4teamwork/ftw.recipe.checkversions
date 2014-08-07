@@ -18,4 +18,6 @@ def main(buildout_dir, versions, blacklists, blacklist_packages, index=None):
     print >>sys.stderr, ''
     print '[versions]'
     for package, version in sorted(updates.items()):
-        print package, '=', version
+        before = '# was {0}'.format(current_versions.get(package))
+        proposed = '{0} = {1}'.format(package, version).ljust(40)
+        print proposed, before
