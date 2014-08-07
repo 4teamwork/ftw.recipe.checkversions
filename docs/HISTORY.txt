@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.1 (unreleased)
+1.2.0 (2014-08-07)
 ------------------
 
 - Show previous version as comment in proposed updates.
