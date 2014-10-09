@@ -22,6 +22,7 @@ def extract_script_arguments(script_path):
     assert match, 'Could not find command call in script %s \n %s' % (
         script_path, xpr)
     kwargs = match.group(1).replace("'", '"')
+    locals()['base'] = '<VARIABLE "base">'  # when relative-paths=true
     return eval(kwargs)
 
 
@@ -134,4 +135,16 @@ class TestRecipe(TestCase):
         script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
         self.assertDictContainsSubset(
             {'index': None},
+            extract_script_arguments(script_path))
+
+    def test_relative_path_support(self):
+        self.write('buildout.cfg',
+                   BUILDOUT_CONFIG
+                   .replace('[buildout]', '[buildout]\nrelative-paths = true')
+                   )
+        self.system(self.buildout)
+        script_path = os.path.join(self.sample_buildout, 'bin', 'checkversions')
+
+        self.assertDictContainsSubset(
+            {'buildout_dir': '<VARIABLE "base">'},
             extract_script_arguments(script_path))

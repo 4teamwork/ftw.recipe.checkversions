@@ -1,4 +1,3 @@
-from pprint import pformat
 from zc.recipe.egg import Egg
 
 
@@ -22,6 +21,24 @@ class Recipe(Egg):
                   'blacklists': blacklists,
                   'blacklist_packages': blacklist_packages,
                   'index': options.get('index', None)}
-        options['arguments'] = '**%s' % pformat(kwargs)
+
+        relative_paths = buildout['buildout'].get('relative-paths', 'false') == 'true'
+        if relative_paths:
+            # With relative-paths, there is a "base" variable containing
+            # the buildout path.
+            buildout_dir_arg = "'buildout_dir': base,\n"
+        else:
+            buildout_dir_arg = "'buildout_dir': {buildout_dir!r},\n".format(**kwargs)
+
+        args_string = ("**{{" +
+                       buildout_dir_arg +
+                       "'versions': {versions!r},\n"
+                       "'blacklists': {blacklists!r},\n"
+                       "'blacklist_packages': {blacklist_packages!r},\n"
+                       "'index': {index!r},\n"
+                       "}}").format(**kwargs)
+
+        options['arguments'] = args_string
+
 
         super(Recipe, self).__init__(buildout, name, options)

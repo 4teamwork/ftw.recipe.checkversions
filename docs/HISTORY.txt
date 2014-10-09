@@ -5,7 +5,8 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add support for "relative-paths" buildout option.
+  [jone]
 
 
 1.2.0 (2014-08-07)
