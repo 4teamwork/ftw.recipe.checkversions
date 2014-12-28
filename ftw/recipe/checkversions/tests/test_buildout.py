@@ -44,7 +44,7 @@ class TestBuildout(TestCase):
 
     def test_versions_from_URL(self):
         self.assertDictContainsSubset(
-            {'setuptools': '',
+            {'setuptools': '<8.0',
              'distribute': ''},
             read_versions(self.tempdir, TEST_VERSIONS_URL))
 
@@ -55,6 +55,6 @@ class TestBuildout(TestCase):
                         'extends = %s' % TEST_VERSIONS_URL))})
 
         self.assertDictContainsSubset(
-            {'setuptools': '',
+            {'setuptools': '<8.0',
              'distribute': ''},
             read_versions(self.tempdir, 'versions.cfg'))
