@@ -64,8 +64,8 @@ Links
 =====
 
 - github project: https://github.com/4teamwork/ftw.recipe.checkversions
-- Issue tracker: https://github.com/4teamwork/ftw.recipe.checkversions/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.recipe.checkversions
+- Issues: https://github.com/4teamwork/ftw.recipe.checkversions/issues
+- Pypi: http://pypi.python.org/pypi/ftw.recipe.checkversions
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.recipe.checkversions
 
 
