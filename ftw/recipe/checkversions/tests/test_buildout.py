@@ -45,7 +45,6 @@ class TestBuildout(TestCase):
     def test_versions_from_URL(self):
         self.assertDictContainsSubset(
             {'setuptools': '',
-             'collective.MockMailHost': '0.8',
              'distribute': ''},
             read_versions(self.tempdir, TEST_VERSIONS_URL))
 
@@ -57,6 +56,5 @@ class TestBuildout(TestCase):
 
         self.assertDictContainsSubset(
             {'setuptools': '',
-             'collective.MockMailHost': '0.8',
              'distribute': ''},
             read_versions(self.tempdir, 'versions.cfg'))
