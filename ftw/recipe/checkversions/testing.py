@@ -40,7 +40,7 @@ class RecipeLayer(Layer):
 
     def testTearDown(self):
         zc.buildout.testing.buildoutTearDown(self)
-        pypi_url = 'http://pypi.python.org/simple'
+        pypi_url = 'https://pypi.python.org/simple'
         zc.buildout.easy_install.default_index_url = pypi_url
         os.environ['buildout-testing-index-url'] = pypi_url
         zc.buildout.easy_install._indexes = {}
